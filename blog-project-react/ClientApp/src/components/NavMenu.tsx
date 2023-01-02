@@ -3,10 +3,14 @@ import { Collapse, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from '
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
 
-export class NavMenu extends Component {
+interface NavMenuData {
+  collapsed: boolean
+}
+
+export class NavMenu extends Component<{}, NavMenuData> {
   static displayName = NavMenu.name;
 
-  constructor (props) {
+  constructor (props: NavMenuData) {
     super(props);
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
@@ -33,7 +37,7 @@ export class NavMenu extends Component {
                 <NavLink tag={Link} className="text-dark" to="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/counter">Counter</NavLink>
+                <NavLink tag={Link} className="text-dark" to="/counter">Contar</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/fetch-data">Fetch data</NavLink>
