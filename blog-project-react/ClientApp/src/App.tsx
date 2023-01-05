@@ -1,36 +1,32 @@
-import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import AppRoutes from './AppRoutes';
+import { useState } from 'react';
+import routes from './routes';
 import BarNavigation from './components/bar-navigation';
+import { navigateTo } from './components/bar-navigation/controllers';
 import './utils/index.css';
 
-interface AppInterface {
-  routes: any
-}
+function App() {
+    const [currentPath, setCurrentPath] = useState({ path: '/', req: {} })
 
-export default class App extends Component<{}, AppInterface> {
-  static displayName = App.name;
-  constructor(props: { routes: any }) {
-    super(props)
+    // Navigation
+    let barNavData = {
+        routes,
+        setCurrentPath
+    };
 
-    this.state = {
-      routes: AppRoutes as any
-    }
-  }
-
-  render() {
-    let routes = this.state.routes
+    const navigate = navigateTo.bind({ props: { setCurrentPath } })
 
     return (
-      <div>
-        <BarNavigation routes={routes} />
-        <Routes>
-          {AppRoutes.map((route, index) => {
-            const { Element, ...rest } = route;
-            return <Route key={index} {...rest} element={<Element />} />;
-          })}
-        </Routes>
-      </div>
+        <div className="App">
+            {routes.map((r: any, idx: number) => {
+
+                if (r.path == currentPath.path) {
+                    return <r.Container navigate={navigate} currentPath={currentPath} key={idx} />;
+                }
+            })}
+
+            <BarNavigation  {...barNavData} />
+        </div>
     );
-  }
-}
+};
+
+export default App;

@@ -1,73 +1,108 @@
-import React, { Component } from 'react';
-import { Blog } from './types';
+// Dependencies
+import React from 'react';
+import { PreviewIntro } from './components/preview-intro';
+import blogs from '../../assets/blogs';
+import setEvent from '../../utils/events-handle';
 import {
-    BlogsInterval
+    presentation,
+    stopPresentation,
+    selectLi,
 } from './controllers/animations';
 import {
-    GlobalEvent
-} from '../../utils/events-handle';
-import blogsData from '../../assets/blogs'
+    clickArticlePreview
+} from './controllers/events';
+import {
+    loadImage
+} from './controllers/image';
 import './styles/index.css';
 
-interface HomeInterface {
-    
-}
+// Global props
+const globalEvents = new setEvent.GlobalEvent()
+let imgLinkBlank = 'https://firebasestorage.googleapis.com/v0/b/tech-website-59d72.appspot.com/o/images%2Ficons%2Ficons8-external-link-96.png?alt=media&token=d97b571c-72b1-4a0c-989f-7802f810b879'
 
-// Event function check without overapplying or recharging.
-const globalEvent = new GlobalEvent();
-
-export class Home extends Component {
+// Page container
+class Home extends React.Component {
     constructor(props: any) {
         super(props)
 
         this.state = {
-            articles: []
+            handleRemoveInterval: null,
+            articlePointer: null,
+            mainInterval: null
         }
     }
 
-    componentDidMount() {
+    // Handlers
+    initPresentation = presentation.bind(this)
+    stopPresentation = stopPresentation.bind(this)
+    selectLi = selectLi.bind(this)
+    selectPreview = clickArticlePreview.bind(this)
+    // articleIntroElem = articleIntroElem.bind(this)
 
-    }
-
-    getArticles = async () => {
-        const response = await fetch('weatherforecast');
-        const data = await response.json();
-
-        console.log('data: ', data);
-        alert('data ' + JSON.stringify(data));
-        this.setState({ articles: [{txt: 'any'}] });
-    }
-     
     render() {
-        let blogs = blogsData as any
-        let blogsInterval = new BlogsInterval()
-        globalEvent.setEventGlobal({ id: 'home-headline-list-event', handler: blogsInterval.presentation })
+        globalEvents.setEventGlobal({ id: 'home-headline-list-event', handler: this.initPresentation, noKillId: true })
 
-        // The first blog has pointer by default
         return (
             <section className="Home page">
+
+                {/* Headlines */}
                 <ul id="home-headline-list">
-                    {blogs.map((blg: Blog, idx: number) => {
-                        setTimeout(() => {
-                            // individual events for li
-                        }, 1000)
+                    {blogs.map((blg, idx) => {
+                        let liId = blg.id
 
                         return (
                             <li
                                 key={idx}
                                 data-url={blg.url}
+                                data-blg-id={blg.id}
+                                id={liId}
+                                onClick={this.selectLi.bind(null, liId)}
                                 className={blg.className}>
 
                                 {blg.title}
                             </li>
-                        );
+                        )
                     })}
 
                     <li className="marker">l</li>
                 </ul>
 
-                <div className="pub-preview"></div>
+                {/* Articles preview */}
+                <div className="pub-preview">
+                    <div className="pub-preview-images">
+                        {blogs.map((blg: any, idx: number) => {
+                            let prevId = 'img-preview-' + blg.id
+
+                            return (
+                                <div
+                                    key={idx}
+                                    id={prevId}
+                                    className={`article-image ${idx == 0 ? 'bring-the-picture-here' : ''}`}>
+                                    <div
+                                        onClick={this.selectPreview.bind(null, blg)}
+                                        className="button-go-to-article" data-id-article={blg.id}>
+                                    </div>
+
+                                    <div className="article-image-effect">
+                                        <PreviewIntro
+                                            handleClickPreviewArticle={this.selectPreview.bind(null, blg)}
+                                            blg={blg} />
+                                    </div>
+
+                                    <a className="author external-link" target="_blank" href={blg.bgImageAuthor}>Autor <img src={imgLinkBlank} /></a>
+                                    <img
+                                        onLoad={loadImage.bind(null, prevId)}
+                                        src={blg.bgImage}
+                                        alt={blg.alt} />
+                                </div>
+                            )
+                        })}
+
+                    </div>
+                </div>
             </section>
-        );
+        )
     }
-};
+}
+
+export default Home

@@ -1,38 +1,56 @@
-import React, { Component } from 'react'
-import Sheet from './components/sheet'
-// import blogs from '../../assets/blogs'
-import './styles/index.css'
+import React from 'react'
+import Sheet from './components/sheet';
+import {
+    PublicationInterface
+} from './article';
+import {
+    clickGoBack
+} from './controllers/header';
+import './styles/index.css';
 
-interface PublicationInterface {
-  blogs: any[]
-}
+class Publication extends React.Component<{}, PublicationInterface> {
+    constructor(props: any) {
+        super(props)
 
-export class Publication extends Component<{}, PublicationInterface> {
-  constructor(props: any) {
-    super(props)
-
-    this.state = {
-      blogs: []
+        this.state = {
+            article: null,
+            articleId: null,
+            currentPath: props.currentPath
+        }
     }
-  }
-  
-  componentDidMount() {
-    // this.populateWeatherData();
-  }
 
+    componentDidMount(): void {
+        // this.getArticleById(this.state.currentPath.req.body.id);
+        this.setState({ article: window.Article });
+        document.querySelector('.Article')?.classList.remove('hide')
+    }
 
-  render() {
+    // Handlers
+    clickGoBack = clickGoBack.bind(this)
+    getArticleById(id: string) {
+        console.log('id', id)
+        let Container = this;
 
-    return (
-      <div className="Sheet page">
+        const response = fetch('weatherforecast')
+            .then(res => {
+                console.log()
+            });
 
-        {this.state.blogs.map((blg, idx) => {
+        console.log('weatherforecast', response)
+    }
 
-          return (
-            <Sheet {...blg} key={idx} />
-          )
-        })}
-      </div>
-    )
-  }
-}
+    render() {
+
+        if (this.state.article == null) return ''
+
+        return (
+            <div className="Article page">
+                <Sheet
+                    clickGoBack={this.clickGoBack}
+                    articleData={this.state.article} />
+            </div>
+        )
+    }
+};
+
+export default Publication;

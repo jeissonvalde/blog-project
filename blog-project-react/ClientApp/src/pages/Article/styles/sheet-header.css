@@ -1,16 +1,24 @@
-
 .sheet-wrap header .button-nav-back {
-  width: 32px;
-  height: 36px;
-  cursor: pointer;
-  margin-top: auto;
+    width: 32px;
+    height: 36px;
+    cursor: pointer;
+    margin-top: auto;
 }
 
 .sheet-wrap header {
-  max-width: 1060px;
-  height: 60px;
-  margin: 0 auto;
-  display: flex;
-  /* background-color: yellow; */
-  padding: 10px;
+    max-width: 1060px;
+    height: 60px;
+    margin: 0 auto;
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sheet-wrap header .article-title {
+    color: rgb(230, 230, 230);
+    font-size: 22px;
+    letter-spacing: .6px;
+    text-align: right;
+    font-weight: bold;
 }
