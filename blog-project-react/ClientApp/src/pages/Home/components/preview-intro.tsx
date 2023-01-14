@@ -12,11 +12,16 @@ export function PreviewIntro(props: any) {
         <></>
     )
 
+    let device_width = window.getComputedStyle(document.getElementById('root') as HTMLElement).width,
+        device_height = window.getComputedStyle(document.getElementById('root') as HTMLElement).height,
+        ulNavElem = document.querySelector('#home-headline-list')
+    // ulNavElem?.insertAdjacentHTML('beforebegin', `<li style="background-color: white;">Ancho ${device_width}, y alto: ${device_height} </li>`)
+
     return (
         <div className="pub-preview-intro">
-            <div className="img-statistics no-display">
-                <img src={imgStatistics} /> Estadísticas
-            </div>
+            {/* <div className="img-statistics no-display">
+                <img src={imgStatistics} /> EstadÃ­sticas
+            </div> */}
 
             <div className="pub-preview-intro-introduction">
                 {blg.introduction.map((intr: any, jdx: number) => {

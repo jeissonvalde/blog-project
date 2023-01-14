@@ -51,7 +51,7 @@ export function presentation(this: any, blogList: []) {
                     markerElem.style.transform = `translate(0px, ${next.offsetTop}px)`
                     setTimeout(() => imgPointer?.classList.remove('take-away-photography'), 7000)
                 }
-            } else { console.log('No est· la lista de titulares.') }
+            } else { console.log('No est√° la lista de titulares.') }
         }, 10000) as any // End interval
 
         window.mainInterval = interv

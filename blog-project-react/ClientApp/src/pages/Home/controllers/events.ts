@@ -15,7 +15,7 @@ export function clickArticlePreview(this: any, blog: BlogInterfaceEv, e: any) {
             pageHome.classList.add('hide')
             pageHome.classList.remove('hide-transition-fade-out')
 
-            this.props.navigate({ path: routePath, label: 'Artículo' })
+            this.props.navigate({ path: routePath, label: 'ArtÃ­culo' })
         }, 1400)
     }
     window.clearInterval(window.mainInterval)

@@ -46,6 +46,7 @@
 }
 
 .page {
+    height: 100vh;
     display: block;
     margin: auto;
     /* Animations */
@@ -58,21 +59,21 @@
     animation-fill-mode: forwards;
 }
 
-    .page.hide {
-        display: none !important;
-    }
+.page.hide {
+    display: none !important;
+}
 
-    .page.hide-transition-fade-out {
-        animation-name: fadeOutAnim;
-        animation-play-state: running;
-        overflow: hidden;
-    }
+.page.hide-transition-fade-out {
+    animation-name: fadeOutAnim;
+    animation-play-state: running;
+    overflow: hidden;
+}
 
-    .page.hide-transition-fade-in {
-        animation-name: fadeOutAnim;
-        animation-direction: reverse;
-        animation-play-state: running;
-    }
+.page.hide-transition-fade-in {
+    animation-name: fadeOutAnim;
+    animation-direction: reverse;
+    animation-play-state: running;
+}
 
 .no-display {
     display: none;
