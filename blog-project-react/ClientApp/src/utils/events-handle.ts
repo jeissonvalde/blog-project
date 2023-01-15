@@ -29,7 +29,7 @@ declare global {
 }
 
 // For just one time, for react components.
-class GlobalEvent {
+class LivingEvent {
     events: any
 
     constructor() {
@@ -46,12 +46,12 @@ class GlobalEvent {
             params.handler()
 
             window.events[params.id] = new Date()
-            console.log('Se inició un evento global',)
+            console.log('Env Ev.')
         }
     }
 }
 
 export default {
     setEvent,
-    GlobalEvent
+    LivingEvent
 }
