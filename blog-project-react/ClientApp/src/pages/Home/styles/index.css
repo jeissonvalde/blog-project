@@ -3,7 +3,7 @@
 
 
 @media (min-width: 769px) {
-    .pub-preview-images {
+    #pub-preview-image {
     }
 
     .pub-preview .article-image {
@@ -56,7 +56,6 @@
 
 #home-headline-list li.marker {
     background-color: white;
-    color: white;
     position: absolute;
     width: 100%;
     top: 0;
@@ -75,7 +74,7 @@
     margin: auto;
 }
 
-.pub-preview-images {
+#pub-preview-image {
     width: 600px;
     height: 600px;
     margin: auto;
@@ -200,7 +199,7 @@
 }
 
 .take-away-photography {
-    animation: takeaway 6.4s cubic-bezier(0.51,-0.01, 0.06, 1.04) forwards;
+    animation: takeaway 6.4s cubic-bezier(0.51,-0.01, 0.06, 1.04) forwards !important;
     z-index: 1;
     display: flex !important;
 }
@@ -286,10 +285,14 @@
 /* Animations */
 @keyframes bringHere {
     0% {
+        opacity: 0;
         transform: translate(0px, 140%) rotate3d(1, 6, 0, 75deg);
     }
-
+    10% {
+        opacity: 1;
+    }
     100% {
+        opacity: 1;
         transform: translate(0px, 0%) rotate3d(0, 0, 0, 0deg);
     }
 }
@@ -298,7 +301,7 @@
     0% {
         transform: translate(0px, 0%) rotate3d(0, 0, 0, 0deg);
     }
-
+    90%,
     100% {
         transform: translate(0px, -160%) rotate3d(8, 2, 1, 75deg);
     }

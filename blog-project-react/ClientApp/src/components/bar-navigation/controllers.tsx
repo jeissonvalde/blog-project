@@ -1,9 +1,6 @@
-import React, { useEffect } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
 import {
-    Route
-} from './types';
-import ReactDOM from 'react-dom';
+    Navigate
+} from 'react-router-dom'
 
 // With Navigate and state
 function clickLiNavigation(this: any, route: { Container: any, path: string }, e: any) {
@@ -11,17 +8,29 @@ function clickLiNavigation(this: any, route: { Container: any, path: string }, e
         AppElem = document.querySelector('.App') as HTMLElement,
         childToRemove = AppElem.firstChild as HTMLElement
 
-    useEffect(() => {
+    // useEffect(() => {
 
         this.setState({ redirect: route.path })
-    }, [])
+    // }, [])
 }
 
 // With useNavigation
 function clickLiNavigation_2(route: { Container: any, path: string }, e: any) {
-    const navigation = useNavigate()
+    // const navigation = useNavigate()
 
-    navigation(route.path)
+    // navigation(route.path)
+}
+
+export function navigate (setRedirect: any, path: string) {
+    setTimeout(() => {
+
+        // Navigate({
+        //     to: path,
+        //     replace: false,
+        //     state: {}
+        // })
+        // setRedirect(path)
+    }, 3000)
 }
 
 export function navigateTo(this: any, route: { Container: any, path: string }) {
@@ -40,12 +49,13 @@ export function navigateTo(this: any, route: { Container: any, path: string }) {
     if (route.path.substring(0, 1) != '/' && route.path.substring(1, 2) == '') {
 
         console.error(route)
-        return alert('URL inv·lida')
+        return alert('URL inv√°lida')
     }
-    if (location.pathname == route.path) return null
+    // if (location.pathname == route.path) return null
 
 
-    let pathName = location.pathname.split('/'),
+    let 
+        // pathName = location.pathname.split('/'),
         pathRoute = route.path as string,
         pathRouteSplited = pathRoute.split('/')
 
@@ -65,12 +75,19 @@ export function navigateTo(this: any, route: { Container: any, path: string }) {
         params[prm[0]] = prm[1]
     }
 
-    this.props.setCurrentPath({ path: currentPath, req: { body: params } })
-    history.replaceState({}, '', pathRoute)
+    // this.props.setCurrentPath({ path: currentPath, req: { body: params } })
+    // history.replaceState({}, '', pathRoute)
 }
 
 export default {
     clickLiNavigation,
     clickLiNavigation_2,
-    navigateTo
+    navigateTo,
+    navigate
+}
+
+// Types
+type NavigationParams = {
+    path: string,
+
 }

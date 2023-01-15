@@ -22,6 +22,24 @@ export interface BlogInterface {
     createdBy: {}
 }
 
+
+export type Article = {
+    title: string,
+    url: string,
+    id: string,
+    introduction: any[],
+    messages: any[],
+    content: string,
+    bgImage: string,
+    bgImageAuthor: string,
+    alt: string,
+    meta: {}[],
+    createdAt: Date,
+    className: string,
+    images: {}[],
+    createdBy: {}
+}
+
 export interface BlogInterfaceElem {
     title: string,
     content: string,

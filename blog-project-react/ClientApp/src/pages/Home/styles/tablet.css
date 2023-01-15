@@ -6,12 +6,12 @@
     /* background-color: red !important; */
   }
 
-  .pub-preview-images {
+  #pub-preview-images {
     width: inherit !important;
     height: 290px !important;
   }
 
-  .pub-preview-images .article-image {
+  #pub-preview-images .article-image {
     width: inherit !important;
     height: inherit !important;
   }

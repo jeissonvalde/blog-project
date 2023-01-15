@@ -1,5 +1,3 @@
-import React, { useState, Component } from 'react'
-
 /*
   The item list pointer can be managed from the title list, located at the top left. 
   Selecting a title brings up each article submission with "bring-the-picture-here" css. 
@@ -7,75 +5,69 @@ import React, { useState, Component } from 'react'
 
   Selecting a title to preview disables automatic viewing.
 */
-export function presentation(this: any, blogList: []) {
+
+// Start or restart presentation
+export function presentation (props: Props) {
+    const { setMainInterval } = props
+
     // let This = this as any
     setTimeout(() => {
-
         let interv = setInterval(() => {
-            let headlineListElem = document.getElementById('home-headline-list')
+            const headlineListElem = document.getElementById('home-headline-list') as HTMLElement
             console.log('Animar')
 
             if (headlineListElem) {
-                let headlineItems = headlineListElem.getElementsByTagName('li') as HTMLCollectionOf<HTMLElement>,
-                    pointer = null,
-                    next = headlineItems[1] && !headlineItems[1].classList.contains('marker') ? headlineItems[1] : null,
-                    markerElem = headlineListElem.querySelector('li.marker') as any
+                /**
+                 * pointer is Li that showing up.
+                 * next, if the next item is undefined then choose the first.
+                 * markerElem is the white background.
+                 */
+                let headlineItems = headlineListElem.getElementsByClassName('headline') as HTMLCollectionOf<HTMLElement>,
+                    pointer = headlineListElem.querySelector('.pointer') as HTMLElement,
+                    pointer_index = Number(pointer.getAttribute('data-idx')),
+                    next = headlineItems[pointer_index + 1] || headlineItems[0],
+                    markerElem = headlineListElem.querySelector('li.marker') as HTMLElement
 
 
-                // Start search pointer
-                for (let idx = 0; idx < headlineItems.length; idx++) {
-                    const hlitem = headlineItems[idx]
-                    if (hlitem.classList.contains('pointer')) {
-                        pointer = hlitem
-                        next = headlineItems[idx + 1] && !headlineItems[idx + 1].classList.contains('marker')
-                            ? headlineItems[idx + 1]
-                            : headlineItems[0]
-                    }
-                } // End search pointer (for).
+                // Take away
+                pointer?.classList.remove('pointer')
+                let imgPointer = document.getElementById('img-preview-' + pointer?.getAttribute('id'))
+                imgPointer?.classList.remove('bring-the-picture-here')
+                imgPointer?.classList.add('take-away-photography')
+                setTimeout(() => imgPointer?.classList.remove('take-away-photography'), 7000)
 
+                // Bring here
+                next?.classList.add('pointer')
+                let nextPreviewId = 'img-preview-' + next?.getAttribute('id')
+                let nextPreviewElem = document.getElementById(nextPreviewId) as HTMLElement
+                nextPreviewElem?.classList.add('bring-the-picture-here')
 
-                if (next && markerElem) {
-                    // Take away
-                    pointer?.classList.remove('pointer')
-                    let imgPointer = document.getElementById('img-preview-' + pointer?.getAttribute('id'))
-                    imgPointer?.classList.remove('bring-the-picture-here')
-                    imgPointer?.classList.add('take-away-photography')
-                    setTimeout(() => imgPointer?.classList.remove('take-away-photography'), 6500)
-
-                    // Bring here
-                    next?.classList.add('pointer')
-                    let prevId = 'img-preview-' + next?.getAttribute('id')
-                    let imgNext = document.getElementById(prevId) as HTMLElement
-                    imgNext?.classList.add('bring-the-picture-here')
-
-                    markerElem.style.transform = `translate(0px, ${next.offsetTop}px)`
-                    setTimeout(() => imgPointer?.classList.remove('take-away-photography'), 7000)
-                }
+                // Move marker
+                markerElem.style.transform = `translate(0px, ${next.offsetTop}px)`
             } else { console.log('No está la lista de titulares.') }
-        }, 10000) as any // End interval
+            // End define pointer element
 
-        window.mainInterval = interv
-        this.setState({
-            mainInterval: interv
-        })
+        }, 8000) // End interval
     }, 1000)
 }
 
 // opt: { callback }
-export function stopPresentation(this: any, opts: any) {
-    clearInterval(this.state.mainInterval)
-    clearInterval(window.mainInterval)
+export function stopPresentation (opts: any, selectedId: string) {
+    // End interval
+    let interval_idx = 0
+    do {
+        clearInterval(interval_idx)
+        interval_idx += 1
+    } while (interval_idx < 101);
 
     let headlineListElem = document.getElementById('home-headline-list'),
-        headlineItems = headlineListElem?.getElementsByTagName('li') as HTMLCollectionOf<HTMLElement>,
-        pubPreviewImagesElem = document.querySelector('.pub-preview-images'),
-        articleImageElems = pubPreviewImagesElem?.getElementsByClassName('article-image') as HTMLCollectionOf<HTMLElement>
+        headlineItems = headlineListElem?.getElementsByClassName('headline') as HTMLCollectionOf<HTMLElement>,
+        pointer = headlineListElem?.querySelector('.pointer'),
+        pointer_index = Number(pointer?.getAttribute('data-idx')),
+        previewListElem = document.getElementById('pub-preview-images'),
+        articleImageElems = previewListElem?.getElementsByClassName('article-image') as HTMLCollectionOf<HTMLElement>
 
-    // Start clean pointers
-    for (let idx = 0; idx < headlineItems.length; idx++) {
-        headlineItems[idx].classList.remove('pointer')
-    }
-
+    pointer?.classList.remove('pointer')
     for (let jdx = 0; jdx < articleImageElems.length; jdx++) {
         if (articleImageElems[jdx].classList.contains('bring-the-picture-here')) {
             articleImageElems[jdx].classList.remove('bring-the-picture-here')
@@ -90,22 +82,8 @@ export function stopPresentation(this: any, opts: any) {
         articleImageElems[jdx].classList.remove('bring-the-picture-here')
         articleImageElems[jdx].classList.remove('take-away-photography')
     }
-    // End clean pointers (for).
+    // End clean pointers (for)
 }
 
-export function selectLi(this: any, idBlg: string) {
-    let markerElem = document.querySelector('#home-headline-list li.marker') as any,
-        liElem = document.getElementById(idBlg) as HTMLElement
-
-
-    this.stopPresentation()
-    markerElem.style.transform = `translate(0px, ${liElem.offsetTop}px)`
-    liElem?.classList.add('pointer')
-    setTimeout(() => {
-        document.getElementById('img-preview-' + idBlg)?.classList.add('bring-the-picture-here')
-    }, 400)
-}
-
-export function clickRespose(e: any) {
-
-}
+// Types
+type Props = { setMainInterval: Function }

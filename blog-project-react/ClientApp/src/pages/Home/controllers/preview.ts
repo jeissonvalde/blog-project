@@ -1,14 +1,14 @@
 import {
-    BlogInterfaceEv
-} from '../home';
+    Article
+} from '../types';
 
 // Click article preview: navigate to Article page.
-export function clickArticlePreview(this: any, blog: BlogInterfaceEv, e: any) {
+export function clickPreview(this: any, artData: Article, e: any) {
     let pageHome = document.getElementsByClassName('Home')[0] as HTMLElement,
         pageArticle = document.getElementsByClassName('Article')[0] as HTMLElement,
-        routePath = `/article?id=${blog.id}`
+        routePath = `/article?id=${artData.id}`
 
-    window.Article = blog
+    window.Article = artData
     if (pageHome) {
         pageHome.classList.add('hide-transition-fade-out')
         setTimeout(() => {

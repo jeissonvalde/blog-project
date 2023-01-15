@@ -21,9 +21,10 @@ export default [
         }
     },
     {
+        index: false,
         Container: Sheet,
         path: 'article',
-        label: 'Publicación',
+        label: 'PublicaciÃ³n',
         icon: {
             tag: 'img',
             value: images.routes.post,

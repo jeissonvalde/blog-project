@@ -1,5 +1,3 @@
-import React from 'react'
-let imgStatistics = 'https://firebasestorage.googleapis.com/v0/b/tech-website-59d72.appspot.com/o/images%2Ficons%2Fstatistics-64.png?alt=media&token=a861ab54-98cb-400b-bcec-2ab8a74a58c5'
 
 export function PreviewIntro(props: any) {
     let {
@@ -19,9 +17,6 @@ export function PreviewIntro(props: any) {
 
     return (
         <div className="pub-preview-intro">
-            {/* <div className="img-statistics no-display">
-                <img src={imgStatistics} /> Estadísticas
-            </div> */}
 
             <div className="pub-preview-intro-introduction">
                 {blg.introduction.map((intr: any, jdx: number) => {

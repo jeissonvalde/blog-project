@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { createPortal } from 'react-dom';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 import controllers from './controllers';
 import "./bar-nav.css";
 
@@ -24,9 +24,9 @@ class BarNavigation extends React.Component<{}, BarNav> {
     render() {
         let routes = this.state.routes
 
-        if (this.state.redirect != null) {
-            return <Navigate to={this.state.redirect} />;
-        }
+        // if (this.state.redirect != null) {
+        //     return <Navigate to={this.state.redirect} />;
+        // }
 
         return createPortal(
             <div className="bar-navigation">

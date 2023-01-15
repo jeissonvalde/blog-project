@@ -5,3 +5,12 @@ export interface Route {
     Container: Component,
     label: string,
 }
+
+// declare global {
+//     interface location {
+//         pathname: string,
+//     }
+//     interface history {
+//         replaceState: any
+//     }
+// }
