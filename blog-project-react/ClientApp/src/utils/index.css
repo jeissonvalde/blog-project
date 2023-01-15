@@ -60,9 +60,9 @@
     animation-fill-mode: forwards;
 }
 
-.page.hide {
+/* .page.hide {
     display: none !important;
-}
+} */
 
 .page.hide-transition-fade-out {
     animation-name: fadeOutAnim;

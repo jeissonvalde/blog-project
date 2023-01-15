@@ -19,7 +19,7 @@ class BarNavigation extends React.Component<{}, BarNav> {
         }
     }
 
-    clickLink = controllers.navigateTo.bind(this)
+    clickLink = controllers.navigate.bind(this)
 
     render() {
         let routes = this.state.routes
@@ -36,7 +36,7 @@ class BarNavigation extends React.Component<{}, BarNav> {
                         return (
                             <li
                                 key={idx}
-                                onClick={this.clickLink.bind(null, r)}>
+                                onClick={this.clickLink.bind(null, this.setState, r)}>
 
                                 <img src={r.icon.value} alt={r.icon.alt} />
                                 {r.label}

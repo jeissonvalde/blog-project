@@ -8,6 +8,16 @@ export function Headlines (props: Props) {
     articleList
   } = props
 
+  setTimeout(() => {
+    const headlinelistElem = document.getElementById('home-headline-list')
+    const headlinelistItemsElem = headlinelistElem?.getElementsByTagName('li') as HTMLCollectionOf<HTMLElement>
+
+    for (let jdx = 0; jdx < headlinelistItemsElem.length; jdx++) {
+      const li = headlinelistItemsElem[jdx]
+      li.setAttribute('style', '--i:' + jdx)
+    }
+  }, 1000)
+
   return (
     <ul id="home-headline-list">
 

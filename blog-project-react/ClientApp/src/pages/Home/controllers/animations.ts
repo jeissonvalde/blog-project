@@ -85,10 +85,10 @@ export function stopPresentation (opts: any) {
     // End clean pointers (for)
 
     // Transition for navigation
-    if (opts.navigating) {
-        headlineListElem?.classList.add('hide')
-        previewListElem?.classList.add('hide')
-    }
+    // if (opts.navigating) {
+    //     headlineListElem?.classList.add('hide')
+    //     previewListElem?.classList.add('hide')
+    // }
 }
 
 // Types

@@ -9,7 +9,7 @@ export function clickHeadline (articleId: string) {
         previewToFocus = document.getElementById('img-preview-' + articleId)
 
     // Clear intervals and remove preview animation
-    stopPresentation(null, 'none')
+    stopPresentation({})
     
     setTimeout(() => {
         markerElem.style.transform = `translate(0px, ${liElem.offsetTop}px)`

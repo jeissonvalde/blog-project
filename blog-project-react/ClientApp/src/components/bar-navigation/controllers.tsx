@@ -6,11 +6,14 @@ import {
 } from '../../pages/Home/controllers/animations';
 
 export function navigate (setRedirect: any, path: string) {
+    const pageElem = document.querySelector('.page') as HTMLElement
+
+    pageElem.classList.add('hide')
     stopPresentation({ navigating: true })
 
     setTimeout(() => {
         setRedirect(path)
-    }, 400)
+    }, 3400)
 }
 
 export function navigateTo(this: any, route: { Container: any, path: string }) {
@@ -60,7 +63,6 @@ export function navigateTo(this: any, route: { Container: any, path: string }) {
 }
 
 export default {
-    navigateTo,
     navigate
 }
 
