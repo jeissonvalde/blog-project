@@ -23,7 +23,7 @@ export default [
     {
         index: false,
         Container: Sheet,
-        path: 'article',
+        path: '/art/:url',
         label: 'Publicación',
         icon: {
             tag: 'img',

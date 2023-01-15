@@ -1,4 +1,5 @@
 @import "./custom.css";
+@import "./navigation.css";
 
 #root {
     max-width: 1280px;

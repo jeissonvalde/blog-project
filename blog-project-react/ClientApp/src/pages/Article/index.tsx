@@ -40,6 +40,7 @@ class Publication extends React.Component<{}, PublicationInterface> {
     }
 
     render() {
+        console.log('Estamos en art')
 
         if (this.state.article == null) return ''
 

@@ -52,7 +52,7 @@ export function presentation (props: Props) {
 }
 
 // opt: { callback }
-export function stopPresentation (opts: any, selectedId: string) {
+export function stopPresentation (opts: any) {
     // End interval
     let interval_idx = 0
     do {
@@ -83,6 +83,12 @@ export function stopPresentation (opts: any, selectedId: string) {
         articleImageElems[jdx].classList.remove('take-away-photography')
     }
     // End clean pointers (for)
+
+    // Transition for navigation
+    if (opts.navigating) {
+        headlineListElem?.classList.add('hide')
+        previewListElem?.classList.add('hide')
+    }
 }
 
 // Types

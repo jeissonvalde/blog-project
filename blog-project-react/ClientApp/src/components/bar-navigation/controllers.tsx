@@ -1,36 +1,16 @@
 import {
     Navigate
-} from 'react-router-dom'
-
-// With Navigate and state
-function clickLiNavigation(this: any, route: { Container: any, path: string }, e: any) {
-    let rootElem = document.getElementById('root') as HTMLElement,
-        AppElem = document.querySelector('.App') as HTMLElement,
-        childToRemove = AppElem.firstChild as HTMLElement
-
-    // useEffect(() => {
-
-        this.setState({ redirect: route.path })
-    // }, [])
-}
-
-// With useNavigation
-function clickLiNavigation_2(route: { Container: any, path: string }, e: any) {
-    // const navigation = useNavigate()
-
-    // navigation(route.path)
-}
+} from 'react-router-dom';
+import {
+    stopPresentation
+} from '../../pages/Home/controllers/animations';
 
 export function navigate (setRedirect: any, path: string) {
-    setTimeout(() => {
+    stopPresentation({ navigating: true })
 
-        // Navigate({
-        //     to: path,
-        //     replace: false,
-        //     state: {}
-        // })
-        // setRedirect(path)
-    }, 3000)
+    setTimeout(() => {
+        setRedirect(path)
+    }, 400)
 }
 
 export function navigateTo(this: any, route: { Container: any, path: string }) {
@@ -80,8 +60,6 @@ export function navigateTo(this: any, route: { Container: any, path: string }) {
 }
 
 export default {
-    clickLiNavigation,
-    clickLiNavigation_2,
     navigateTo,
     navigate
 }
@@ -89,5 +67,4 @@ export default {
 // Types
 type NavigationParams = {
     path: string,
-
 }

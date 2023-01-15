@@ -4,6 +4,9 @@ import {
   useEffect,
   useReducer
 } from 'react';
+import {
+  Navigate
+} from 'react-router-dom';
 import { ArticleListData } from '../../assets/blogs';
 import setEvent from '../../utils/events-handle';
 import { presentation } from './controllers/animations';
@@ -23,15 +26,7 @@ export default function Home () {
       [ mainInterval, setMainInterval ] = useState(),
       [ articleList, setArticleList ] = useState(ArticleListData)
 
-    useEffect(() => {
-      // Navigation
-      if (redirect) {
-        setTimeout(() => {
-          console.log('despues de 2s', redirect)
-        }, 2000)
-        console.log('useEffect redirect: ', redirect)
-      }
-    }, [ redirect, articleList ])
+    useEffect(() => {}, [ redirect, articleList ])
 
     // Handlers
     livingEv.setEventGlobal({
@@ -39,7 +34,12 @@ export default function Home () {
       handler: presentation.bind(null, { setMainInterval }),
       noKillId: true,
     })
+    
+    // Navigation
     const navigateTo = navigate.bind(null, setRedirect)
+    if (redirect != null) {
+      return <Navigate to={redirect} />
+    }
 
 
     // JSX

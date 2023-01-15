@@ -5,7 +5,6 @@ import {
 } from 'react-router-dom';
 import routes from './routes';
 import BarNavigation from './components/bar-navigation';
-import { navigateTo } from './components/bar-navigation/controllers';
 import './utils/index.css';
 
 function App() {
@@ -17,17 +16,13 @@ function App() {
         setCurrentPath
     };
 
-    const navigate = navigateTo.bind({ props: { setCurrentPath } })
-
     return (
         <div className="App">
             <Routes>
                 {routes.map((r: RRoute, idx: number) => {
 
-                    if (r.path == currentPath.path) {
-                        return <Route {...r} element={<r.Container />} key={idx} />;
-                        // return <r.Container navigate={navigate} currentPath={currentPath} key={idx} />;
-                    }
+                    return <Route {...r} element={<r.Container />} key={idx} />;
+                    // return <r.Container navigate={navigate} currentPath={currentPath} key={idx} />;
                 })}
             </Routes>
 
