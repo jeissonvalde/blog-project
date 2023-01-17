@@ -1,16 +1,8 @@
-import {
-  Link,
-} from 'react-router-dom';
-import {
-  Article
-} from '../types';
+import { Link } from 'react-router-dom';
+import { Article } from '../types';
 import { PreviewIntro } from './preview-intro';
-import {
-  loadImage
-} from '../controllers/image';
-import {
-  clickPreview,
-} from '../controllers/preview';
+import { loadImage } from '../controllers/image';
+import { clickPreview } from '../controllers/preview';
 import images from '../../../assets/images.json';
 
 export function PreviewImages (props: Props) {
@@ -24,7 +16,8 @@ export function PreviewImages (props: Props) {
       <div id="pub-preview-images">
 
         {articleList.map((articleData, idx: number) => {
-          let previewId = 'img-preview-' + articleData.id
+          let previewId = 'img-preview-' + articleData.id,
+            url = `art/${articleData.url}/${articleData.id}`
 
           return (
             <div
@@ -34,13 +27,13 @@ export function PreviewImages (props: Props) {
 
 
               <div
-                onClick={navigateTo.bind(null, 'art/' + articleData.url)}
+                onClick={navigateTo.bind(null, url)}
                 className="button-go-to-article" data-id-article={articleData.id}>
               </div>
 
               <div className="article-image-effect">
                 <PreviewIntro
-                  handleClickPreviewArticle={navigateTo.bind(null, 'art/' + articleData.url)}
+                  handleClickPreviewArticle={navigateTo.bind(null, url)}
                   blg={articleData} />
               </div>
 

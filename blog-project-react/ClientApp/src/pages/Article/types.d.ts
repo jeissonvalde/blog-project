@@ -1,5 +1,14 @@
 
-export interface ArticleInterface {
+export type ArticleData = {
+    title: string,
+    content: string,
+    bgImage: string,
+    meta: {}[],
+    images: {}[],
+    createdBy: {}
+}
+
+export type ArticleType = {
     title: string,
     content: string,
     bgImage: string,

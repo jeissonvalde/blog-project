@@ -2,10 +2,10 @@ import React from 'react'
 import SheetHeader from './header'
 import SheetContent from './content'
 import {
-    ArticleInterface
-} from '../article'
+    ArticleType
+} from '../types'
 
-function Sheet(props: { articleData: ArticleInterface, clickGoBack: any }) {
+function Sheet(props: Props) {
 
     return (
         <section className="sheet-wrap">
@@ -13,6 +13,11 @@ function Sheet(props: { articleData: ArticleInterface, clickGoBack: any }) {
             <SheetContent {...props} />
         </section>
     )
+}
+
+type Props = {
+    articleData: ArticleType
+    clickGoBack: any
 }
 
 export default Sheet

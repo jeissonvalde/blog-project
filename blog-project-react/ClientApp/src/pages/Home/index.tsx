@@ -10,11 +10,10 @@ import {
 import { ArticleListData } from '../../assets/blogs';
 import setEvent from '../../utils/events-handle';
 import { presentation } from './controllers/animations';
-import { navigate } from '../../components/bar-navigation/controllers'
-import {
-    Headlines,
-    PreviewImages
-} from './components'
+import { navigate } from '../../components/bar-navigation/controllers';
+import { Headlines, PreviewImages } from './components'
+import { getHeadlineList } from './controllers/http';
+import { FetchData } from '../../components/FetchData'
 import './styles/index.css';
 
 // Global props
@@ -34,25 +33,37 @@ export default function Home () {
       handler: presentation.bind(null, { setMainInterval }),
       noKillId: true,
     })
-    
+
     // Navigation
     const navigateTo = navigate.bind(null, setRedirect)
     if (redirect != null) {
       return <Navigate to={redirect} />
     }
 
+    // Server
+    getHeadlineList(setArticleList)
 
     // JSX
     return (
         <section className="Home page">      
           {/* Headlines */}
-          <Headlines 
-              articleList={ArticleListData}/>
+          {articleList
+              ? <>
+                  <Headlines 
+                    articleList={ArticleListData}/>
+                  <PreviewImages
+                      navigateTo={navigateTo}
+                      articleList={articleList}/>
+                </>
+              : <div className="spinner-bg">
+                  <label>Por favor espera</label>
+                  <div className="progress">
+                      <div className="indeterminate"></div>
+                  </div>
+              </div>
+          }
 
-          {/* Articles preview */}
-          <PreviewImages
-              navigateTo={navigateTo}
-              articleList={articleList}/>
+          <FetchData />
         </section>
     )
 }

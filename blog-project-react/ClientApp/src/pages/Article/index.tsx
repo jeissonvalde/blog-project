@@ -1,57 +1,37 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Sheet from './components/sheet';
-import {
-    PublicationInterface
-} from './article';
-import {
-    clickGoBack
-} from './controllers/header';
+import { ArticleData } from './types';
+import { clickGoBack } from './controllers/header';
+import { getArticleById } from './controllers/http';
 import './styles/index.css';
 
-class Publication extends React.Component<{}, PublicationInterface> {
-    constructor(props: any) {
-        super(props)
+function Publication () {
+    const { id } = useParams()
+    const [ articleData, setArticle ] = useState()
 
-        this.state = {
-            article: null,
-            articleId: null,
-            currentPath: props.currentPath
-        }
-    }
+    useEffect(() => {
+        console.log('useEffect', articleData)
+    }, [ articleData ])
 
-    componentDidMount(): void {
-        // this.getArticleById(this.state.currentPath.req.body.id);
-        this.setState({ article: window.Article });
-        document.querySelector('.Article')?.classList.remove('hide')
-    }
+    getArticleById(id, setArticle)
 
-    // Handlers
-    clickGoBack = clickGoBack.bind(this)
-    getArticleById(id: string) {
-        console.log('id', id)
-        let Container = this;
-
-        const response = fetch('weatherforecast')
-            .then(res => {
-                console.log()
-            });
-
-        console.log('weatherforecast', response)
-    }
-
-    render() {
-        console.log('Estamos en art')
-
-        if (this.state.article == null) return ''
-
-        return (
-            <div className="Article page">
-                <Sheet
-                    clickGoBack={this.clickGoBack}
-                    articleData={this.state.article} />
-            </div>
-        )
-    }
+    return (
+        <div className="Article page">
+            {articleData
+                ? <Sheet
+                    clickGoBack={clickGoBack}
+                    articleData={articleData} />
+                    
+                : <div className="spinner-bg">
+                    <label>Por favor espera</label>
+                    <div className="progress">
+                        <div className="indeterminate"></div>
+                    </div>
+                </div>
+            }
+        </div>
+    )
 };
 
 export default Publication;

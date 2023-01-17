@@ -1,7 +1,5 @@
 import { Article } from '../types';
-import {
-  clickHeadline
-} from '../controllers/headlines';
+import { clickHeadline } from '../controllers/headlines';
 
 export function Headlines (props: Props) {
   const {

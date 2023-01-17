@@ -4,10 +4,10 @@ import images from '../../../assets/images.json'
 import SheetPeople from './people'
 import handles from '../controllers/content'
 import {
-    ArticleInterface
-} from '../article'
+    ArticleData
+} from '../types'
 
-function BlogContent(props: { articleData: ArticleInterface }) {
+function BlogContent(props: { articleData: ArticleData }) {
     const {
         articleData
     } = props

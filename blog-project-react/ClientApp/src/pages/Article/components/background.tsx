@@ -1,6 +1,6 @@
 import {
-    ArticleInterface
-} from '../article'
+    ArticleData
+} from '../types'
 
 function loadBgImage(e: any) {
     let articleBackgroundImages = document.querySelector('.sheet-background-image') as HTMLElement,
@@ -16,7 +16,7 @@ function loadBgImage(e: any) {
     }, 1000)
 }
 
-function Background(props: { articleData: ArticleInterface }) {
+function Background(props: { articleData: ArticleData }) {
     let articleData = props.articleData
 
     return (
