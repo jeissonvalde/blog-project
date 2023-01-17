@@ -12,7 +12,7 @@
 
 .page.hide #pub-preview-images,
 .page.hide #home-headline-list {
-    /* animation-name: fadeOut !important; */
+    animation-name: fadeOut !important;
 }
 
 .page.hide #home-headline-list li {
@@ -27,16 +27,12 @@
     perspective: 2000px;
 }
 
-.page.hide #pub-preview-images {
+/* .page.hide #pub-preview-images {
     animation-name: takeAway !important;
     animation-duration: 3s;
     animation-fill-mode: forwards;
     animation-timing-function: cubic-bezier(0.51, 0.04, 0.39, 0.54);
-    /* animation-delay: calc(var(--i) * .2s); */
-}
-
-/* #home-headline-list.hide li {
-    transform: translateX(-120%);
+    /* animation-delay: calc(var(--i) * .2s);
 } */
 
 @keyframes fadeIn {

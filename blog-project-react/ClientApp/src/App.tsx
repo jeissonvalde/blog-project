@@ -6,6 +6,7 @@ import {
 import routes from './routes';
 import BarNavigation from './components/bar-navigation';
 import './utils/index.css';
+import 'materialize-css/dist/css/materialize.min.css';
 
 function App() {
     const [currentPath, setCurrentPath] = useState({ path: '/', req: {} })
