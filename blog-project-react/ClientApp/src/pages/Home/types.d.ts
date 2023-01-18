@@ -40,6 +40,19 @@ export type Article = {
     createdBy: {}
 }
 
+
+export type Headline = {
+    title: string,
+    url: string,
+    headlineId: string,
+    introduction: any[],
+    bgImage: string,
+    bgImageAuthor: string,
+    alt: string,
+    meta: {}[],
+    createdAt: Date,
+}
+
 export interface BlogInterfaceElem {
     title: string,
     content: string,

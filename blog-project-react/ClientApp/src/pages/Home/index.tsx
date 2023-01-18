@@ -4,16 +4,12 @@ import {
   useEffect,
   useReducer
 } from 'react';
-import {
-  Navigate
-} from 'react-router-dom';
-import { ArticleListData } from '../../assets/blogs';
+import { Navigate } from 'react-router-dom';
 import setEvent from '../../utils/events-handle';
 import { presentation } from './controllers/animations';
 import { navigate } from '../../components/bar-navigation/controllers';
 import { Headlines, PreviewImages } from './components'
 import { getHeadlineList } from './controllers/http';
-import { FetchData } from '../../components/FetchData'
 import './styles/index.css';
 
 // Global props
@@ -23,9 +19,10 @@ const livingEv = new setEvent.LivingEvent()
 export default function Home () {
     const [ redirect, setRedirect ] = useState(),
       [ mainInterval, setMainInterval ] = useState(),
-      [ articleList, setArticleList ] = useState(ArticleListData)
+      [ articleList, setArticleList ] = useState()
 
-    useEffect(() => {}, [ redirect, articleList ])
+    useEffect(() => {
+    }, [ redirect, articleList ])
 
     // Handlers
     livingEv.setEventGlobal({
@@ -41,7 +38,9 @@ export default function Home () {
     }
 
     // Server
-    getHeadlineList(setArticleList)
+    if (!articleList) {
+      getHeadlineList(setArticleList)
+    }
 
     // JSX
     return (
@@ -50,7 +49,7 @@ export default function Home () {
           {articleList
               ? <>
                   <Headlines 
-                    articleList={ArticleListData}/>
+                    articleList={articleList}/>
                   <PreviewImages
                       navigateTo={navigateTo}
                       articleList={articleList}/>
@@ -63,7 +62,6 @@ export default function Home () {
               </div>
           }
 
-          <FetchData />
         </section>
     )
 }

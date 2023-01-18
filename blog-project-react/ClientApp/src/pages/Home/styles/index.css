@@ -30,7 +30,7 @@
 
 #home-headline-list {
     list-style: none;
-    width: 240px;
+    max-width: 280px;
     position: absolute;
     padding: 0;
     z-index: 5;

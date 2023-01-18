@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Article } from '../types';
+import { Headline } from '../types';
 import { PreviewIntro } from './preview-intro';
 import { loadImage } from '../controllers/image';
 import { clickPreview } from '../controllers/preview';
@@ -16,8 +16,8 @@ export function PreviewImages (props: Props) {
       <div id="pub-preview-images">
 
         {articleList.map((articleData, idx: number) => {
-          let previewId = 'img-preview-' + articleData.id,
-            url = `art/${articleData.url}/${articleData.id}`
+          let previewId = 'img-preview-' + articleData.headlineId,
+            url = `art/${articleData.url}/${articleData.headlineId}`
 
           return (
             <div
@@ -28,7 +28,7 @@ export function PreviewImages (props: Props) {
 
               <div
                 onClick={navigateTo.bind(null, url)}
-                className="button-go-to-article" data-id-article={articleData.id}>
+                className="button-go-to-article" data-id-article={articleData.headlineId}>
               </div>
 
               <div className="article-image-effect">
@@ -52,6 +52,6 @@ export function PreviewImages (props: Props) {
 }
 
 type Props = {
-  articleList: Article[],
+  articleList: Headline[],
   navigateTo: Function
 }

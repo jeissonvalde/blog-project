@@ -1,4 +1,4 @@
-import { Article } from '../types';
+import { Headline } from '../types';
 import { clickHeadline } from '../controllers/headlines';
 
 export function Headlines (props: Props) {
@@ -20,16 +20,16 @@ export function Headlines (props: Props) {
     <ul id="home-headline-list">
 
       {articleList.map((articleData, idx) => {
-        let liId = articleData.id
+        let liId = articleData.headlineId
 
         return (
           <li
             key={idx}
             data-idx={idx}
             data-url={articleData.url}
-            data-blg-id={articleData.id}
+            data-blg-id={liId}
             id={liId}
-            onClick={clickHeadline.bind(null, articleData.id)}
+            onClick={clickHeadline.bind(null, liId)}
             className={`headline ${idx == 0 ? 'pointer' : ''}`}>
 
             {articleData.title}
@@ -43,5 +43,5 @@ export function Headlines (props: Props) {
 }
 
 interface Props {
-  articleList: Article[],
+  articleList: Headline[],
 }

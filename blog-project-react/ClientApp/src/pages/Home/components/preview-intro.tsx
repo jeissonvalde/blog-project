@@ -1,10 +1,10 @@
-
 export function PreviewIntro(props: any) {
     let {
         blg,
         current,
         handleClickPreviewArticle,
     } = props
+    const introSplited = blg.introduction.split(',')
 
     if (!blg.introduction || !blg.introduction[0]) return (
         <></>
@@ -19,7 +19,7 @@ export function PreviewIntro(props: any) {
         <div className="pub-preview-intro">
 
             <div className="pub-preview-intro-introduction">
-                {blg.introduction.map((intr: any, jdx: number) => {
+                {introSplited.map((intr: any, jdx: number) => {
                     let textStyle = {
                         "--jdx": jdx + 1
                     } as any
@@ -35,7 +35,7 @@ export function PreviewIntro(props: any) {
             </div>
 
             <div className="pub-preview-intro-speak">
-                {blg.messages.map((messData: any, kdx: number) => {
+                {blg.messages ? blg.messages.map((messData: any, kdx: number) => {
 
                     return (
                         <div key={kdx} className="ppis-message">
@@ -56,7 +56,7 @@ export function PreviewIntro(props: any) {
                             </div>
                         </div>
                     )
-                })}
+                }) : ''}
             </div>
         </div>
     )
