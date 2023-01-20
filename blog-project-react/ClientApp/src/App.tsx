@@ -4,7 +4,7 @@ import {
     Routes,
 } from 'react-router-dom';
 import routes from './routes';
-import BarNavigation from './components/bar-navigation';
+import { BarNavigation } from './components';
 import './utils/index.css';
 import 'materialize-css/dist/css/materialize.min.css';
 
